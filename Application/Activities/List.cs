@@ -14,7 +14,6 @@ namespace Application.Activities
 
         public class Handler : IRequestHandler<Query, List<Activity>>
         {
-            private readonly ILogger<List> _logger;
             private readonly DataContext _context;
 
             public Handler(DataContext context)
