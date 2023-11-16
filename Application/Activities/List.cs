@@ -17,28 +17,13 @@ namespace Application.Activities
             private readonly ILogger<List> _logger;
             private readonly DataContext _context;
 
-            public Handler(DataContext context, ILogger<List> logger)
+            public Handler(DataContext context)
             {
-                _logger = logger;
                 _context = context;
             }
 
-            public async Task<List<Activity>> IRequestHandler<Query, List<Activity>>.Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<Activity>> Handle(Query request, CancellationToken token)
             {
-                try
-                {
-                    for (var i = 0; i < 10; i++)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        await Task.Delay(1000, cancellationToken);
-                        _logger.LogInformation($"Task {i} has completed.")
-                    };
-                }
-                catch (System.Exception)
-                {
-                    _logger.LogInformation("Task was cancelled.");
-                }
-
                 return await _context.Activities.ToListAsync();
             }
 
