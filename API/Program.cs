@@ -1,3 +1,4 @@
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // things we use inside our application
 
 builder.Services.AddControllers();
+builder.Services.AddApplicationServices(builder.Configuration);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -27,8 +30,6 @@ builder.Services.AddCors(opt => {
 
 // Build App
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline. 
 // Middleware - things that can do something with http request on its way in or out
